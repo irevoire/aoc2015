@@ -40,7 +40,7 @@ fn repeat(s: &str) -> bool {
     s.chars()
         .collect::<Vec<char>>()
         .windows(3)
-        .any(|arr| arr[0] != arr[1] && arr[0] == arr[2])
+        .any(|arr| arr[0] == arr[2])
 }
 
 #[cfg(test)]
