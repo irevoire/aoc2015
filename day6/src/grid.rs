@@ -1,10 +1,7 @@
+use crate::Coord;
+
 pub struct Grid {
     data: Vec<Vec<bool>>,
-}
-
-pub struct Coord {
-    pub x: usize,
-    pub y: usize,
 }
 
 impl Grid {
@@ -14,25 +11,56 @@ impl Grid {
         }
     }
 
-    pub fn toogle(&mut self, coord: Coord) {
-        assert!(coord.x < 1000 && coord.y < 1000);
-
-        self.data[coord.y][coord.x] = !self.data[coord.y][coord.x];
+    pub fn toggle(&mut self, coord: Coord) {
+        self[&coord] = !self[&coord];
     }
 
     pub fn turn_on(&mut self, coord: Coord) {
-        assert!(coord.x < 1000 && coord.y < 1000);
-
-        self.data[coord.y][coord.x] = true;
+        self[&coord] = true;
     }
 
     pub fn turn_off(&mut self, coord: Coord) {
-        assert!(coord.x < 1000 && coord.y < 1000);
-
-        self.data[coord.y][coord.x] = false;
+        self[&coord] = false;
     }
 
     pub fn through(&mut self, from: Coord, to: Coord, apply: impl Fn(&mut Self, Coord)) {
-        apply(self, from);
+        for coord in from.to(to) {
+            apply(self, coord);
+        }
+    }
+
+    pub fn lit(&self) -> usize {
+        Coord::new(0, 0)
+            .to(Coord::new(999, 999))
+            .fold(0_usize, |acc, coord| acc + self[&coord] as usize)
+    }
+}
+
+impl std::ops::Index<&Coord> for Grid {
+    type Output = bool;
+
+    fn index(&self, index: &Coord) -> &Self::Output {
+        assert!(index.x < 1000 && index.y < 1000);
+        &self.data[index.y][index.x]
+    }
+}
+
+impl std::ops::IndexMut<&Coord> for Grid {
+    fn index_mut(&mut self, index: &Coord) -> &mut Self::Output {
+        assert!(index.x < 1000 && index.y < 1000);
+        &mut self.data[index.y][index.x]
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_through() {
+        let mut grid = Grid::new();
+
+        grid.through(Coord::new(0, 0), Coord::new(2, 2), Grid::turn_on);
+        assert_eq!(grid.lit(), 9);
     }
 }
