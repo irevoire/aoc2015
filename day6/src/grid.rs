@@ -27,6 +27,16 @@ impl Grid {
         self[&coord] = 0;
     }
 
+    pub fn update(n: isize) -> impl Fn(&mut Self, Coord) {
+        move |grid, coord| {
+            if n < 0 {
+                grid[&coord] = grid[&coord].saturating_sub(n.abs() as usize);
+            } else {
+                grid[&coord] += n as usize;
+            }
+        }
+    }
+
     pub fn through(&mut self, from: Coord, to: Coord, apply: impl Fn(&mut Self, Coord)) {
         for coord in from.to(to) {
             apply(self, coord);
@@ -62,6 +72,14 @@ mod tests {
 
     #[test]
     fn test_through() {
+        let mut grid = Grid::new();
+
+        grid.through(Coord::new(0, 0), Coord::new(2, 2), Grid::turn_on);
+        assert_eq!(grid.lit(), 9);
+    }
+
+    #[test]
+    fn test_through_part2() {
         let mut grid = Grid::new();
 
         grid.through(Coord::new(0, 0), Coord::new(2, 2), Grid::turn_on);
