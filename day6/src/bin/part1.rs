@@ -1,4 +1,4 @@
-use day6::{Coord, Grid};
+use aoc::{Coord, Grid};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
@@ -11,7 +11,7 @@ fn main() {
     let file = File::open(filename).expect("Can’t open file");
     let reader = BufReader::new(file);
 
-    let mut grid = Grid::new();
+    let mut grid = Grid::from(vec![vec![0_usize; 1000]; 1000]);
 
     reader
         .lines()
@@ -19,16 +19,23 @@ fn main() {
         .for_each(|line| {
             let mut vec: Vec<&str> = line.rsplitn(4, ' ').collect();
             vec.reverse();
-            let base: Coord = vec[1].parse().unwrap();
-            let end: Coord = vec[3].parse().unwrap();
+            let base: Coord<usize> = vec[1].parse().unwrap();
+            let end: Coord<usize> = vec[3].parse().unwrap();
 
+            let iter = grid.through_mut(base, end).unwrap();
             match vec[0] {
-                "turn on" => grid.through(base, end, Grid::turn_on),
-                "turn off" => grid.through(base, end, Grid::turn_off),
-                "toggle" => grid.through(base, end, Grid::toggle),
+                "turn on" => iter.for_each(|el| *el = 1),
+                "turn off" => iter.for_each(|el| *el = 0),
+                "toggle" => iter.for_each(|el| {
+                    *el = match el {
+                        0 => 1,
+                        1 => 0,
+                        _ => panic!("ntm"),
+                    }
+                }),
                 s => panic!("wtf is this shit: {}", s),
             }
         });
 
-    println!("There is {} light lit", grid.lit());
+    println!("There is {} light lit", grid.iter().sum::<usize>());
 }
