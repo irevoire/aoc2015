@@ -1,8 +1,8 @@
-use day3::Coord;
+use aoc::{Coord, Direction};
 use std::collections::HashSet;
 
 fn main() {
-    let mut santa = Coord::new();
+    let mut santa = Coord::<i32>::new();
     let mut bot = Coord::new();
     let mut set = HashSet::new();
 
@@ -13,15 +13,19 @@ fn main() {
 
     loop {
         let s = iter.next().unwrap();
-        if s == '\n' {
+        if let Ok(dir) = s.to_string().parse::<Direction>() {
+            santa += dir;
+            set.insert(santa.clone());
+        } else {
             break;
         }
         let b = iter.next().unwrap();
-
-        santa += s;
-        bot += b;
-        set.insert(santa.clone());
-        set.insert(bot.clone());
+        if let Ok(dir) = b.to_string().parse::<Direction>() {
+            bot += dir;
+            set.insert(bot.clone());
+        } else {
+            break;
+        }
     }
 
     println!("total: {}", set.len());
