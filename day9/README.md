@@ -33,3 +33,7 @@ For example, given the distances above, the longest route would be `982` via (fo
 
 What is the distance of the longest route?
 
+---------------
+
+Here is a visualization of my input:
+![](input.jpg)
