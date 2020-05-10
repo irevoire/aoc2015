@@ -1,0 +1,45 @@
+use itertools::Itertools;
+
+fn main() {
+    let mut map = std::collections::HashMap::new();
+    let mut peoples = std::collections::HashSet::new();
+
+    for line in aoc::parser::lines_from_args(1) {
+        let line: Vec<&str> = line[..line.len() - 1].split(" ").map(str::trim).collect();
+        let (left, right, gain, value) = (line[0], line[10], line[2], line[3]);
+        let value = match gain {
+            "gain" => value.parse::<isize>().unwrap(),
+            "lose" => -value.parse::<isize>().unwrap(),
+            gain => panic!("Unexpected value {}", gain),
+        };
+
+        map.insert((left.to_string(), right.to_string()), value);
+        peoples.insert(left.to_string());
+    }
+
+    let happiness: isize = peoples
+        .iter()
+        .permutations(peoples.len())
+        .map(|relations| {
+            relations
+                .windows(2)
+                .map(|arr| {
+                    map.get(&(arr[0].clone(), arr[1].clone())).unwrap()
+                        + map.get(&(arr[1].clone(), arr[0].clone())).unwrap()
+                })
+                .sum::<isize>()
+                + map
+                    .get(&(relations[relations.len() - 1].clone(), relations[0].clone()))
+                    .unwrap()
+                + map
+                    .get(&(relations[0].clone(), relations[relations.len() - 1].clone()))
+                    .unwrap()
+        })
+        .max()
+        .unwrap();
+
+    println!(
+        "the best arrangement generate {} total happiness",
+        happiness
+    );
+}
