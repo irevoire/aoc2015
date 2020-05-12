@@ -29,7 +29,7 @@ impl Ingredient {
 }
 
 use std::convert::TryInto;
-pub fn score(list: &[Ingredient]) -> usize {
+pub fn score(list: &[&Ingredient]) -> usize {
     let capacity: usize = list
         .iter()
         .map(|ing| ing.capacity)

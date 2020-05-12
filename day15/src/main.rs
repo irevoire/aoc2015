@@ -23,8 +23,8 @@ fn main() {
     let mut best = 0;
     // iter while we have not get 1000 iteration without any improvement
     while iter < 100000 {
-        let mut base: Vec<Ingredient> =
-            std::iter::repeat_with(|| all_ingredients.choose(&mut rng).unwrap().clone())
+        let mut base: Vec<&Ingredient> =
+            std::iter::repeat_with(|| all_ingredients.choose(&mut rng).unwrap())
                 .take(100)
                 .collect();
         greed(&all_ingredients, &mut base);
@@ -39,23 +39,23 @@ fn main() {
     println!("greedy best score is {}", best);
 }
 
-fn greed(base: &Vec<Ingredient>, current: &mut Vec<Ingredient>) {
+fn greed<'a>(base: &'a Vec<Ingredient>, current: &mut Vec<&'a Ingredient>) {
     let mut base_score = score(current);
     if base_score == 0 {
         return; // it’s shit and I don’t want to lose any time on this
     }
     for idx in 0..base.len() {
-        let base_ingr = current[idx].clone();
+        let base_ingr = current[idx];
         for ingr in base {
-            if ingr == &base_ingr {
+            if ingr == base_ingr {
                 return;
             }
-            current[idx] = ingr.clone();
+            current[idx] = &ingr;
             let score = score(current);
             if score > base_score {
                 base_score = score;
             } else {
-                current[idx] = base_ingr.clone()
+                current[idx] = base_ingr;
             }
         }
     }
