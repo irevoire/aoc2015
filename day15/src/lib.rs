@@ -1,11 +1,11 @@
 #[derive(Debug, Clone, PartialEq)]
 pub struct Ingredient {
     name: String,
-    capacity: isize,
-    durability: isize,
-    flavor: isize,
-    texture: isize,
-    calories: isize,
+    pub capacity: isize,
+    pub durability: isize,
+    pub flavor: isize,
+    pub texture: isize,
+    pub calories: isize,
 }
 
 impl Ingredient {
@@ -56,4 +56,15 @@ pub fn score(list: &[&Ingredient]) -> usize {
         .unwrap_or(0);
 
     capacity * durability * flavor * texture
+}
+
+pub fn calories(list: &[&Ingredient]) -> usize {
+    let calories: usize = list
+        .iter()
+        .map(|ing| ing.calories)
+        .sum::<isize>()
+        .try_into()
+        .unwrap_or(0);
+
+    calories
 }
