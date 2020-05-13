@@ -1,14 +1,16 @@
+use std::ops::{RangeFrom, RangeTo};
+
 #[derive(Debug)]
 pub struct Aunt {
     name: String,
     children: Option<usize>,
-    cats: Option<usize>,
+    cats: Option<RangeFrom<usize>>,
     samoyeds: Option<usize>,
-    pomeranians: Option<usize>,
+    pomeranians: Option<RangeTo<usize>>,
     akitas: Option<usize>,
     vizslas: Option<usize>,
-    goldfish: Option<usize>,
-    trees: Option<usize>,
+    goldfish: Option<RangeTo<usize>>,
+    trees: Option<RangeFrom<usize>>,
     cars: Option<usize>,
     perfumes: Option<usize>,
 }
@@ -39,7 +41,7 @@ impl Aunt {
     }
 
     pub fn with_cats(&mut self, cats: usize) {
-        self.cats = Some(cats);
+        self.cats = Some(cats..);
     }
 
     pub fn with_samoyeds(&mut self, samoyeds: usize) {
@@ -47,7 +49,7 @@ impl Aunt {
     }
 
     pub fn with_pomeranians(&mut self, pomeranians: usize) {
-        self.pomeranians = Some(pomeranians);
+        self.pomeranians = Some(..pomeranians);
     }
 
     pub fn with_akitas(&mut self, akitas: usize) {
@@ -59,11 +61,11 @@ impl Aunt {
     }
 
     pub fn with_goldfish(&mut self, goldfish: usize) {
-        self.goldfish = Some(goldfish);
+        self.goldfish = Some(..goldfish);
     }
 
     pub fn with_trees(&mut self, trees: usize) {
-        self.trees = Some(trees);
+        self.trees = Some(trees..);
     }
 
     pub fn with_cars(&mut self, cars: usize) {
@@ -73,18 +75,57 @@ impl Aunt {
     pub fn with_perfumes(&mut self, perfumes: usize) {
         self.perfumes = Some(perfumes);
     }
+
+    pub fn could_be(&self, other: &Self) -> bool {
+        let mut eq = self.children.and(other.children) == other.children.and(self.children)
+            && self.samoyeds.and(other.samoyeds) == other.samoyeds.and(self.samoyeds)
+            && self.akitas.and(other.akitas) == other.akitas.and(self.akitas)
+            && self.vizslas.and(other.vizslas) == other.vizslas.and(self.vizslas)
+            && self.cars.and(other.cars) == other.cars.and(self.cars)
+            && self.perfumes.and(other.perfumes) == other.perfumes.and(self.perfumes);
+
+        if self.cats.is_some() && other.cats.is_some() {
+            eq &= self
+                .cats
+                .as_ref()
+                .unwrap()
+                .contains(&other.cats.as_ref().unwrap().start);
+        }
+        if self.trees.is_some() && other.trees.is_some() {
+            eq &= self
+                .trees
+                .as_ref()
+                .unwrap()
+                .contains(&other.trees.as_ref().unwrap().start);
+        }
+        if self.pomeranians.is_some() && other.pomeranians.is_some() {
+            eq &= self
+                .pomeranians
+                .unwrap()
+                .contains(&other.pomeranians.unwrap().end);
+        }
+        if self.goldfish.is_some() && other.goldfish.is_some() {
+            eq &= self
+                .goldfish
+                .unwrap()
+                .contains(&other.goldfish.unwrap().end);
+        }
+        eq
+    }
 }
 
 impl PartialEq for Aunt {
     fn eq(&self, other: &Self) -> bool {
         self.children.and(other.children) == other.children.and(self.children)
-            && self.cats.and(other.cats) == other.cats.and(self.cats)
+            && self.cats.as_ref().and(other.cats.as_ref())
+                == other.cats.as_ref().and(self.cats.as_ref())
             && self.samoyeds.and(other.samoyeds) == other.samoyeds.and(self.samoyeds)
             && self.pomeranians.and(other.pomeranians) == other.pomeranians.and(self.pomeranians)
             && self.akitas.and(other.akitas) == other.akitas.and(self.akitas)
             && self.vizslas.and(other.vizslas) == other.vizslas.and(self.vizslas)
             && self.goldfish.and(other.goldfish) == other.goldfish.and(self.goldfish)
-            && self.trees.and(other.trees) == other.trees.and(self.trees)
+            && self.trees.as_ref().and(other.trees.as_ref())
+                == other.trees.as_ref().and(self.trees.as_ref())
             && self.cars.and(other.cars) == other.cars.and(self.cars)
             && self.perfumes.and(other.perfumes) == other.perfumes.and(self.perfumes)
     }
