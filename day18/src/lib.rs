@@ -1,5 +1,19 @@
 use aoc::{Coord, Direction::*, Grid};
 
+pub fn print_grid(grid: &Grid<bool>) {
+    print!("\x1B[100A");
+
+    for line in grid.lines() {
+        for el in line {
+            match el {
+                true => print!("#"),
+                false => print!("."),
+            }
+        }
+        println!();
+    }
+}
+
 pub fn neighbours(coord: Coord<usize>, grid: &Grid<bool>) -> usize {
     match (coord.x, coord.y) {
         (0, 0) => {
