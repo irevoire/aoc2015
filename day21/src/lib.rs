@@ -4,7 +4,7 @@ pub struct Entity {
     pub damage: usize,
     pub armor: usize,
 
-    pub weapon_used: Option<usize>,
+    pub weapon_used: usize,
     pub armor_used: Option<usize>,
     pub left_ring: Option<usize>,
     pub right_ring: Option<usize>,
@@ -19,11 +19,10 @@ impl Entity {
         let mut me = Entity::new();
         let mut cost = 0;
         me.hp = self.hp;
-        if self.weapon_used.is_some() {
-            me.damage += shop.weapons[self.weapon_used.unwrap()].damage;
-            me.armor += shop.weapons[self.weapon_used.unwrap()].armor;
-            cost += shop.weapons[self.weapon_used.unwrap()].cost;
-        }
+        me.damage += shop.weapons[self.weapon_used].damage;
+        me.armor += shop.weapons[self.weapon_used].armor;
+        cost += shop.weapons[self.weapon_used].cost;
+
         if self.armor_used.is_some() {
             me.damage += shop.armor[self.armor_used.unwrap()].damage;
             me.armor += shop.armor[self.armor_used.unwrap()].armor;
@@ -100,12 +99,7 @@ impl Entity {
     }
 
     pub fn increment_weapon(&mut self, _shop: &Shop) {
-        if self.weapon_used.is_none() {
-            self.weapon_used = Some(0);
-        } else if let Some(mut a) = self.weapon_used {
-            a += 1;
-            self.weapon_used = Some(a);
-        }
+        self.weapon_used += 1;
     }
 }
 

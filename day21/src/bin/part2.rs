@@ -16,21 +16,21 @@ fn main() {
         }
     }
 
-    let mut best_cost = std::usize::MAX;
+    let mut worst_cost = 0;
 
     loop {
         let (won, cost) = player.fight(&boss, &shop);
-        if won && cost < best_cost {
-            best_cost = cost;
+        if !won && cost > worst_cost {
+            worst_cost = cost;
         }
         player.increment(&shop);
-        if player.weapon_used == Some(shop.weapons.len()) {
+        if player.weapon_used == shop.weapons.len() {
             break;
         }
     }
 
     println!(
-        "The best cost possible to win against the boss is {}",
-        best_cost
+        "The most gold you can spend and still lose against the boss is {}",
+        worst_cost
     );
 }
