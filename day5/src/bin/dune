@@ -1,0 +1,5 @@
+(executables
+ (names part1)
+ (public_names part1)
+ (modes exe)
+)
