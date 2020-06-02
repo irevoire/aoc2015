@@ -1,6 +1,6 @@
 (executables
 	(names part1)
 	(public_names part1)
-	(libraries str)
+	(libraries str lib)
 	(modes exe)
 )
