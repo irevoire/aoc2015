@@ -1,19 +1,15 @@
-use aoc::{Coord, Direction};
+use aoc::*;
 use std::collections::HashSet;
 
 fn main() {
-    let mut coord = Coord::<i32>::new();
-    let mut set = HashSet::new();
+    let total = parser::chars_as_strings_from_args(1)
+        .filter_map(|c| c.parse::<Direction>().ok())
+        .scan(Coord::<isize>::default(), |acc, dir| {
+            *acc += dir;
+            Some(*acc)
+        })
+        .collect::<HashSet<Coord<_>>>()
+        .len();
 
-    let input = std::fs::read("input").unwrap();
-
-    set.insert(coord.clone());
-    for c in input.iter().map(|b| *b as char) {
-        if let Ok(dir) = c.to_string().parse::<Direction>() {
-            coord += dir;
-            set.insert(coord.clone());
-        }
-    }
-
-    println!("total: {}", set.len());
+    println!("total: {}", total);
 }
