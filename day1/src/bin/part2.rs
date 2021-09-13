@@ -1,17 +1,15 @@
 fn main() {
-    let input = std::fs::read("input").unwrap();
-    let mut acc = 0;
-    let res = input
-        .iter()
+    let res: usize = aoc::parser::chars_from_args(1)
         .map(|c| match c {
-            b'(' => 1,
-            b')' => -1,
+            '(' => 1,
+            ')' => -1,
             _ => 0,
         })
-        .position(|i| {
-            acc += i;
-            acc == -1
+        .scan(0, |acc, el| {
+            *acc += el;
+            Some(*acc)
         })
+        .position(|level| level == -1)
         .unwrap();
 
     println!("position: {}", res + 1);

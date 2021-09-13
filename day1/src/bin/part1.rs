@@ -1,10 +1,8 @@
 fn main() {
-    let input = std::fs::read("input").unwrap();
-    let res: i32 = input
-        .iter()
+    let res: isize = aoc::parser::chars_from_args(1)
         .map(|c| match c {
-            b'(' => 1,
-            b')' => -1,
+            '(' => 1,
+            ')' => -1,
             _ => 0,
         })
         .sum();
