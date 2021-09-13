@@ -1,3 +1,5 @@
+use std::str::FromStr;
+
 pub struct Cuboid(pub usize, pub usize, pub usize);
 
 impl Cuboid {
@@ -33,6 +35,19 @@ impl Cuboid {
 
     pub fn ribbon_needed(&self) -> usize {
         self.smallest_distances_around_sides() + self.volume()
+    }
+}
+
+impl FromStr for Cuboid {
+    type Err = usize;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        let split = s
+            .split('x')
+            .map(|el| el.parse().unwrap())
+            .take(3)
+            .collect::<Vec<_>>();
+        Ok(Cuboid(split[0], split[1], split[2]))
     }
 }
 
