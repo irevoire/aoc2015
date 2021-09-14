@@ -2,8 +2,7 @@ use aoc::*;
 use std::collections::HashSet;
 
 fn main() {
-    let total = parser::chars_as_strings_from_args(1)
-        .filter_map(|c| c.parse::<Direction>().ok())
+    let total = parser::chars_from_args_as::<Direction>(1)
         .scan(Coord::<isize>::default(), |acc, dir| {
             *acc += dir;
             Some(*acc)

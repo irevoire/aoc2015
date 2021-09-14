@@ -2,8 +2,7 @@ use aoc::*;
 use std::collections::HashSet;
 
 fn main() {
-    let (santa, robot): (Vec<_>, Vec<_>) = parser::chars_as_strings_from_args(1)
-        .filter_map(|c| c.parse::<Direction>().ok())
+    let (santa, robot): (Vec<_>, Vec<_>) = parser::chars_from_args_as::<Direction>(1)
         .collect::<Vec<_>>()
         .chunks(2)
         .scan(
