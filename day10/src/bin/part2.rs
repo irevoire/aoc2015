@@ -6,5 +6,5 @@ fn main() {
     for _ in 0..50 {
         output = expand(&output);
     }
-    println!("{}", output.len());
+    aoc::anwser!("{}", output.len());
 }

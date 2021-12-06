@@ -1,5 +1,5 @@
 fn main() {
-    let containers: Vec<usize> = aoc::parser::lines_from_args(1)
+    let containers: Vec<usize> = aoc::parser::lines()
         .map(|line| line.parse().unwrap())
         .collect();
     let mut used = vec![false; containers.len()];
@@ -15,7 +15,7 @@ fn main() {
         }
     }
 
-    println!("There is {} possibilities", total);
+    aoc::answer!("There is {} possibilities", total);
 }
 
 fn increment(used: &mut [bool]) {

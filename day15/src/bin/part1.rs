@@ -2,7 +2,7 @@ use day15::*;
 use rand::seq::SliceRandom;
 
 fn main() {
-    let all_ingredients: Vec<Ingredient> = aoc::parser::lines_from_args(1)
+    let all_ingredients: Vec<Ingredient> = aoc::parser::lines::<String>()
         .map(|line| {
             let line: Vec<&str> = line.split(':').collect();
             let name = line[0].into();
@@ -36,7 +36,7 @@ fn main() {
         iter += 1;
     }
 
-    println!("greedy best score is {}", best);
+    aoc::answer!("Greedy best score is {}", best);
 }
 
 fn greed<'a>(base: &'a Vec<Ingredient>, current: &mut Vec<&'a Ingredient>) {

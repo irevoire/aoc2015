@@ -1,5 +1,7 @@
+use aoc::*;
+
 fn main() {
-    let res: usize = aoc::parser::chars_from_args(1)
+    let res: usize = parser::chars::<char>()
         .map(|c| match c {
             '(' => 1,
             ')' => -1,
@@ -12,5 +14,8 @@ fn main() {
         .position(|level| level == -1)
         .unwrap();
 
-    println!("position: {}", res + 1);
+    answer!(
+        "The position of the character that causes Santa to first enter the basement is: {}.",
+        res
+    );
 }

@@ -134,7 +134,7 @@ impl PartialEq for Aunt {
 pub fn parse() -> Vec<Aunt> {
     let mut aunts = Vec::new();
 
-    for line in aoc::parser::lines_from_args(1) {
+    for line in aoc::parser::lines::<String>() {
         let line: Vec<&str> = line.splitn(2, ':').collect();
         let mut aunt = Aunt::new(line[0].into());
 

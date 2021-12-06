@@ -1,16 +1,7 @@
-use std::fs::File;
-use std::io::BufReader;
+use aoc::*;
 
 fn main() {
-    let filename = std::env::args()
-        .skip(1)
-        .next()
-        .expect("give me the path to your program"); // Skiping the name of the binary
-
-    let file = File::open(filename).expect("Can’t open file");
-    let reader = BufReader::new(file);
-
-    let original = day7::parse(reader);
+    let original = day7::parse();
     let mut assignations = original.clone();
 
     let a = assignations.get("a").unwrap().clone();
@@ -22,5 +13,5 @@ fn main() {
     // restart everything
     let a = assignations.get("a").unwrap().clone();
 
-    println!("{}", a.compute(&mut assignations).unwrap());
+    answer!("{}", a.compute(&mut assignations).unwrap());
 }

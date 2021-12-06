@@ -1,5 +1,7 @@
+use aoc::*;
+
 fn main() {
-    let res: isize = aoc::parser::chars_from_args(1)
+    let res: isize = parser::chars::<char>()
         .map(|c| match c {
             '(' => 1,
             ')' => -1,
@@ -7,5 +9,5 @@ fn main() {
         })
         .sum();
 
-    println!("res: {}", res);
+    answer!("The instructions bring Santa to the {} floor.", res);
 }

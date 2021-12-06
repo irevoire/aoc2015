@@ -1,7 +1,7 @@
 use day23::*;
 
 fn main() {
-    let instructions: Vec<Instr> = aoc::parser::lines_from_args(1)
+    let instructions: Vec<Instr> = aoc::parser::lines::<String>()
         .map(|line| line.parse().unwrap())
         .collect();
 
@@ -11,5 +11,5 @@ fn main() {
         cpu.cycle();
     }
 
-    println!("register B: {}", cpu.b);
+    aoc::answer!("register B: {}", cpu.b);
 }

@@ -1,10 +1,9 @@
-use std::collections::HashMap;
-use std::io::BufRead;
+use aoc::*;
 
-pub fn parse<R: BufRead>(reader: R) -> HashMap<String, Value> {
-    reader
-        .lines()
-        .filter_map(|line| line.ok())
+use std::collections::HashMap;
+
+pub fn parse() -> HashMap<String, Value> {
+    parser::lines::<String>()
         .map(|line| {
             let mut split = line.rsplit("->").map(str::trim);
             (

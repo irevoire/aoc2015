@@ -1,5 +1,5 @@
 fn main() {
-    let containers: Vec<usize> = aoc::parser::lines_from_args(1)
+    let containers: Vec<usize> = aoc::parser::lines()
         .map(|line| line.parse().unwrap())
         .collect();
     let mut used = vec![false; containers.len()];
@@ -23,9 +23,10 @@ fn main() {
         }
     }
 
-    println!(
+    aoc::answer!(
         "There is {} way to fill 150 litters with a minimum of {} containers",
-        total, min
+        total,
+        min
     );
 }
 

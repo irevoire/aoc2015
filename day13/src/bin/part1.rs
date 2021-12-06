@@ -4,7 +4,7 @@ fn main() {
     let mut map = std::collections::HashMap::new();
     let mut peoples = std::collections::HashSet::new();
 
-    for line in aoc::parser::lines_from_args(1) {
+    for line in aoc::parser::lines::<String>() {
         let line: Vec<&str> = line[..line.len() - 1].split(" ").map(str::trim).collect();
         let (left, right, gain, value) = (line[0], line[10], line[2], line[3]);
         let value = match gain {
@@ -38,7 +38,7 @@ fn main() {
         .max()
         .unwrap();
 
-    println!(
+    answer!(
         "the best arrangement generate {} total happiness",
         happiness
     );

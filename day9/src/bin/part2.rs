@@ -4,7 +4,7 @@ fn main() {
     let mut map = std::collections::HashMap::new();
     let mut all_cities = std::collections::HashSet::new();
 
-    for line in aoc::parser::lines_from_args(1) {
+    for line in aoc::parser::lines() {
         let line: Vec<&str> = line.split("=").map(str::trim).collect();
         let (cities, distance) = (line[0], line[1]);
         let distance: usize = distance.parse().unwrap();
@@ -31,5 +31,5 @@ fn main() {
         .max()
         .unwrap();
 
-    println!("the longest path is: {}", distance);
+    answer!("the longest path is: {}", distance);
 }

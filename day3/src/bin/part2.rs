@@ -2,7 +2,7 @@ use aoc::*;
 use std::collections::HashSet;
 
 fn main() {
-    let (santa, robot): (Vec<_>, Vec<_>) = parser::chars_from_args_as::<Direction>(1)
+    let (santa, robot): (Vec<_>, Vec<_>) = parser::chars::<Direction>()
         .collect::<Vec<_>>()
         .chunks(2)
         .scan(
@@ -17,5 +17,5 @@ fn main() {
 
     let total = santa.iter().chain(&robot).collect::<HashSet<_>>().len();
 
-    println!("total: {}", total);
+    answer!("{} house will receive at least one present.", total);
 }

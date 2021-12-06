@@ -1,7 +1,7 @@
 use aoc::{Coord, Grid};
 
 fn main() {
-    let grid: Vec<Vec<bool>> = aoc::parser::lines_from_args(1)
+    let grid: Vec<Vec<bool>> = aoc::parser::lines()
         .map(|line| {
             line.chars()
                 .map(|c| match c {
@@ -21,7 +21,7 @@ fn main() {
 
     let total: usize = grid.iter().map(|b| *b as usize).sum();
 
-    println!("There is a total of {} light on", total);
+    aoc::answer!("There is a total of {} light on", total);
 }
 
 fn update_grid(grid: &Grid<bool>) -> Grid<bool> {

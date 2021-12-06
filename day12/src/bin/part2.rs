@@ -1,5 +1,5 @@
 fn main() {
-    let json = aoc::parser::read_file_from_args(1);
+    let json = aoc::parser::input();
 
     let object: serde_json::Value = serde_json::from_str(&json).unwrap();
     let mut total = 0;
@@ -13,7 +13,7 @@ fn main() {
         }
     });
 
-    println!("{}", total);
+    aoc::answer!("{}", total);
 }
 
 fn apply(value: &serde_json::Value, fun: &mut impl FnMut(&serde_json::Value)) {

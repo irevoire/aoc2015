@@ -1,7 +1,7 @@
 use itertools::Itertools;
 
 fn main() {
-    let weights: Vec<usize> = aoc::parser::lines_from_args(1)
+    let weights: Vec<usize> = aoc::parser::lines::<String>()
         .map(|line| line.parse::<usize>().unwrap())
         .collect();
 
@@ -27,7 +27,7 @@ fn main() {
 
     let best: usize = solutions.iter().map(|s| s.iter().product()).min().unwrap();
 
-    println!(
+    aoc::answer!(
         "The best solution for santa has a quantum entanglement of {}",
         best
     );

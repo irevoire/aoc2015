@@ -1,9 +1,10 @@
 use std::collections::{HashMap, HashSet};
+
 fn main() {
     let mut replacements: HashMap<String, Vec<String>> = HashMap::new();
     let mut end = false;
     let mut input = String::new();
-    for line in aoc::parser::lines_from_args(1) {
+    for line in aoc::parser::lines() {
         if end {
             input = line.into();
         } else if line.is_empty() {
@@ -19,7 +20,7 @@ fn main() {
 
     let nb = permutations(&input, &replacements);
 
-    println!("There is {} possible permutations", nb);
+    aoc::answer!("There is {} possible permutations", nb);
 }
 
 fn permutations(input: &str, replacements: &HashMap<String, Vec<String>>) -> usize {

@@ -1,22 +1,9 @@
-use std::fs::File;
-use std::io::{prelude::*, BufReader};
+use aoc::*;
 
 fn main() {
-    let filename = std::env::args()
-        .skip(1)
-        .next()
-        .expect("give me the path to your program"); // Skiping the name of the binary
+    let nice: usize = parser::lines::<String>().filter(|line| nice(line)).count();
 
-    let file = File::open(filename).expect("Can’t open file");
-    let reader = BufReader::new(file);
-
-    let nice: usize = reader
-        .lines()
-        .filter_map(|line| line.ok())
-        .filter(|line| nice(line))
-        .count();
-
-    println!("There is {} nice string", nice);
+    answer!("There is {} nice string", nice);
 }
 
 fn nice(s: &str) -> bool {

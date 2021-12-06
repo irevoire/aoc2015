@@ -1,17 +1,11 @@
-use std::fs::File;
-use std::io::BufReader;
+use aoc::*;
 
 fn main() {
-    let filename = std::env::args()
-        .skip(1)
-        .next()
-        .expect("give me the path to your program"); // Skiping the name of the binary
-
-    let file = File::open(filename).expect("Can’t open file");
-    let reader = BufReader::new(file);
-
-    let mut assignations = day7::parse(reader);
+    let mut assignations = day7::parse();
 
     let a = assignations.get("a").unwrap().clone();
-    println!("{}", a.compute(&mut assignations).unwrap());
+    answer!(
+        "The final signal provided to the wire a is {}.",
+        a.compute(&mut assignations).unwrap()
+    );
 }
