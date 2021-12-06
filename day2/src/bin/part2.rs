@@ -5,5 +5,5 @@ fn main() {
     let ribbon: usize = parser::lines::<Cuboid>()
         .map(|cube| cube.ribbon_needed())
         .sum();
-    answer!("They should order {} square feet of ribbon.", ribbon);
+   aoc::answer!("They should order {} square feet of ribbon.", ribbon);
 }

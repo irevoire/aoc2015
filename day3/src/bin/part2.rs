@@ -17,5 +17,5 @@ fn main() {
 
     let total = santa.iter().chain(&robot).collect::<HashSet<_>>().len();
 
-    answer!("{} house will receive at least one present.", total);
+   aoc::answer!("{} house will receive at least one present.", total);
 }

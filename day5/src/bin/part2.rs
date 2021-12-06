@@ -3,7 +3,7 @@ use aoc::*;
 fn main() {
     let nice: usize = parser::lines::<String>().filter(|line| nice(line)).count();
 
-    answer!("There is {} nice string", nice);
+   aoc::answer!("There is {} nice string", nice);
 }
 
 fn nice(s: &str) -> bool {

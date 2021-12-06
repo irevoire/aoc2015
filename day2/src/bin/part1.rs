@@ -5,5 +5,5 @@ fn main() {
     let paper: usize = parser::lines::<Cuboid>()
         .map(|cube| cube.paper_needed())
         .sum();
-    answer!("They should order {} square feet of wrapping paper.", paper);
+   aoc::answer!("They should order {} square feet of wrapping paper.", paper);
 }

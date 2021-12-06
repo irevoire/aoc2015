@@ -4,7 +4,7 @@ fn main() {
     let mut replacements: HashMap<String, Vec<String>> = HashMap::new();
     let mut end = false;
     let mut input = String::new();
-    for line in aoc::parser::lines() {
+    for line in aoc::parser::lines::<String>() {
         if end {
             input = line.into();
         } else if line.is_empty() {

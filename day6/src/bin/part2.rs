@@ -3,7 +3,7 @@ use aoc::*;
 fn main() {
     let mut grid = Grid::from(vec![vec![0_usize; 1000]; 1000]);
 
-    parser::lines().for_each(|line| {
+    parser::lines::<String>().for_each(|line| {
         let mut vec: Vec<&str> = line.rsplitn(4, ' ').collect();
         vec.reverse();
         let base: Coord<usize> = vec[1].parse().unwrap();
@@ -18,5 +18,5 @@ fn main() {
         }
     });
 
-    answer!("There is {} light lit", grid.iter().sum::<usize>());
+   aoc::answer!("There is {} light lit", grid.iter().sum::<usize>());
 }

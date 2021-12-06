@@ -24,5 +24,5 @@ fn main() {
         }
     });
 
-    answer!("There is {} light lit", grid.iter().sum::<usize>());
+   aoc::answer!("There is {} light lit", grid.iter().sum::<usize>());
 }

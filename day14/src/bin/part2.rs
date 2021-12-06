@@ -3,7 +3,7 @@ use day14::Reindeer;
 fn main() {
     let time = 2503;
 
-    let reindeers = aoc::parser::lines()
+    let reindeers = aoc::parser::lines::<String>()
         .filter_map(|line| {
             let line: Vec<&str> = line.split(' ').collect();
             let (name, speed, duration, rest) = (
@@ -29,5 +29,5 @@ fn main() {
         scores[winner.unwrap()] += 1;
     }
 
-    answer!("The winner scored {}", scores.iter().max().unwrap());
+   aoc::answer!("The winner scored {}", scores.iter().max().unwrap());
 }

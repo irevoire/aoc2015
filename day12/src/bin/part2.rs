@@ -1,5 +1,5 @@
 fn main() {
-    let json = aoc::parser::input();
+    let json = aoc::parser::input::<String>();
 
     let object: serde_json::Value = serde_json::from_str(&json).unwrap();
     let mut total = 0;

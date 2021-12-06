@@ -2,7 +2,7 @@ use day15::*;
 use std::convert::TryInto;
 
 fn main() {
-    let all_ingredients: Vec<Ingredient> = aoc::parser::lines()
+    let all_ingredients: Vec<Ingredient> = aoc::parser::lines::<String>()
         .map(|line| {
             let line: Vec<&str> = line.split(':').collect();
             let name = line[0].into();
@@ -68,5 +68,5 @@ fn main() {
         }
     }
 
-    aoc::nswer!("Greedy best score is {}", best);
+    aoc::answer!("Greedy best score is {}", best);
 }

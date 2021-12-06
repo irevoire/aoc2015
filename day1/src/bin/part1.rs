@@ -9,5 +9,5 @@ fn main() {
         })
         .sum();
 
-    answer!("The instructions bring Santa to the {} floor.", res);
+   aoc::answer!("The instructions bring Santa to the {} floor.", res);
 }

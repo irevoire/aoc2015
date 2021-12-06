@@ -4,7 +4,7 @@ use Effect::*;
 fn main() {
     let mut boss = Entity::default();
 
-    for line in aoc::parser::lines_from_args(1) {
+    for line in aoc::parser::lines::<String>() {
         let mut line = line.split(':').map(str::trim);
         match line.next().unwrap() {
             "Hit Points" => boss.hp = line.next().unwrap().parse().unwrap(),

@@ -1,7 +1,7 @@
 use aoc::{Coord, Grid};
 
 fn main() {
-    let grid: Vec<Vec<bool>> = aoc::parser::lines_from_args(1)
+    let grid: Vec<Vec<bool>> = aoc::parser::lines::<String>()
         .map(|line| {
             line.chars()
                 .map(|c| match c {

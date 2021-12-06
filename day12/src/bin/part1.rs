@@ -13,7 +13,7 @@ fn main() {
         }
     });
 
-    answer!("{}", total);
+   aoc::answer!("{}", total);
 }
 
 fn apply(value: &serde_json::Value, fun: &mut impl FnMut(&serde_json::Value)) {

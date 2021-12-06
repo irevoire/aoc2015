@@ -14,7 +14,7 @@ fn main() {
         .position(|level| level == -1)
         .unwrap();
 
-    answer!(
+   aoc::answer!(
         "The position of the character that causes Santa to first enter the basement is: {}.",
         res
     );

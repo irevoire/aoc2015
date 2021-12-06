@@ -16,9 +16,8 @@ fn main() {
             }
         }
     }
-    aoc::answer!(
+    println!(
         "The house {} will be the first to get {} gifts or more",
-        max_index,
-        input
+        max_index, input
     );
 }

@@ -1,5 +1,5 @@
 fn main() {
-    let containers: Vec<usize> = aoc::parser::lines()
+    let containers: Vec<usize> = aoc::parser::lines::<String>()
         .map(|line| line.parse().unwrap())
         .collect();
     let mut used = vec![false; containers.len()];

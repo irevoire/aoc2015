@@ -10,5 +10,5 @@ fn main() {
         .collect::<HashSet<Coord<_>>>()
         .len();
 
-    answer!("{} houses will receive at least one present.", total);
+   aoc::answer!("{} houses will receive at least one present.", total);
 }

@@ -38,7 +38,7 @@ fn main() {
         .max()
         .unwrap();
 
-    answer!(
+   aoc::answer!(
         "the best arrangement generate {} total happiness",
         happiness
     );

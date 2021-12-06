@@ -1,5 +1,3 @@
-use aoc::*;
-
 fn main() {
     let original = day7::parse();
     let mut assignations = original.clone();
@@ -13,5 +11,5 @@ fn main() {
     // restart everything
     let a = assignations.get("a").unwrap().clone();
 
-    answer!("{}", a.compute(&mut assignations).unwrap());
+    aoc::answer!("{}", a.compute(&mut assignations).unwrap());
 }

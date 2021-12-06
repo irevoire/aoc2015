@@ -1,6 +1,6 @@
 fn main() {
     println!("graph G {{");
-    for line in aoc::parser::lines_from_args(1) {
+    for line in aoc::parser::lines::<String>() {
         let line: Vec<&str> = line.split("=").map(str::trim).collect();
         let (cities, distance) = (line[0], line[1]);
         let distance: usize = distance.parse().unwrap();

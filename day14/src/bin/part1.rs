@@ -3,7 +3,7 @@ use day14::Reindeer;
 fn main() {
     let time = 2503;
 
-    let distance = aoc::parser::lines()
+    let distance = aoc::parser::lines::<String>()
         .filter_map(|line| {
             let line: Vec<&str> = line.split(' ').collect();
             let (name, speed, duration, rest) = (
@@ -19,5 +19,5 @@ fn main() {
         .max()
         .unwrap();
 
-    answer!("The winner traveled for {}", distance);
+    aoc::answer!("The winner traveled for {}", distance);
 }
